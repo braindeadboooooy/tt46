@@ -543,19 +543,26 @@ int main(int argc, char *argv[])
                         {
                             count_sotr = mas_shop[i].Getsotrudnik_count();
                         }
-                        ciz_information **mas_ciz = mas_shop[i].Getmas_ciz();
-                        if (*mas_ciz != NULL)
+                        if(count_sotr == 0)
                         {
-                            count_ciz = mas_shop[i].Getciz_count();
-                            for (int k = 0; k < count_ciz; ++k)
-                            {
-                                count = ceil((double)data_srok / (double)(*mas_ciz)[k].Getciz_data()) * mas_shop[i].Getsotrudnik_count();
-                                cout << "на " << data_srok << " дней нужно " << (*mas_ciz)[k].Getciz_name() << " количество " << count << endl;
-                            }
+                            cout << "В цеху нет сотрудников!" << endl;
                         }
                         else
                         {
-                            cout << "На предприятии нет СИЗ" << endl;
+                            ciz_information **mas_ciz = mas_shop[i].Getmas_ciz();
+                            if (*mas_ciz != NULL)
+                            {
+                                count_ciz = mas_shop[i].Getciz_count();
+                                for (int k = 0; k < count_ciz; ++k)
+                                {
+                                    count = ceil((double)data_srok / (double)(*mas_ciz)[k].Getciz_data()) * mas_shop[i].Getsotrudnik_count();
+                                    cout << "на " << data_srok << " дней нужно " << (*mas_ciz)[k].Getciz_name() << " количество " << count << endl;
+                                }
+                            }
+                            else
+                            {
+                                cout << "На предприятии нет СИЗ" << endl;
+                            }
                         }
                     }
                 }
